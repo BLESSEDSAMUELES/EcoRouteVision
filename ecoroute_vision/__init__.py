@@ -1,12 +1,30 @@
 """
-EcoRouteVision - AI-powered road analysis for sustainable routing
+Legacy alias for TerraPave.
+Deprecated: Use `terrapave` instead.
 """
 
-__version__ = "0.1.0"
-__author__ = "Your Name"
-__email__ = "your.email@example.com"
+import warnings
+warnings.warn(
+    "The 'ecoroute_vision' module is deprecated and has been renamed to 'terrapave'. "
+    "Please update your imports to 'from terrapave import ...'",
+    DeprecationWarning,
+    stacklevel=2
+)
 
-from .detector import RoadDetector
-from .analyzer import SustainabilityAnalyzer
+from terrapave import (
+    RoadDetector,
+    SustainabilityAnalyzer,
+    calculate_road_quality_score,
+    draw_detections,
+    create_sustainability_dashboard,
+    generate_synthetic_road_frame,
+)
 
-__all__ = ['RoadDetector', 'SustainabilityAnalyzer']
+__all__ = [
+    "RoadDetector",
+    "SustainabilityAnalyzer",
+    "calculate_road_quality_score",
+    "draw_detections",
+    "create_sustainability_dashboard",
+    "generate_synthetic_road_frame",
+]

@@ -1,26 +1,33 @@
 #!/usr/bin/env python3
 """
-Download pretrained models for EcoRouteVision
+TerraPave Model Manager & Weight Downloader
+Downloads baseline YOLO checkpoints and optimizes for edge inference (ONNX export).
 """
 
-from ultralytics import YOLO
 import os
+from ultralytics import YOLO
 
 
-def download_models():
-    """Download required models"""
-    models_dir = 'models'
+def setup_models():
+    """Download baseline models and create models directory structure."""
+    models_dir = os.path.join(os.path.dirname(__file__), "models")
     os.makedirs(models_dir, exist_ok=True)
 
-    print("Downloading YOLOv8n model...")
-    model = YOLO('yolov8n.pt')
-    model.export(format='onnx')  # Export to ONNX for potential optimization
+    print("[TerraPave] Preparing baseline detection models...")
+    model = YOLO("yolov8n.pt")
+    
+    # Export to ONNX format for accelerated cross-platform inference
+    onnx_target = os.path.join(models_dir, "yolov8n.onnx")
+    if not os.path.exists(onnx_target):
+        try:
+            print("[TerraPave] Exporting baseline YOLOv8n to ONNX format...")
+            model.export(format="onnx")
+        except Exception as e:
+            print(f"[TerraPave] ONNX export notice: {e}")
 
-    print("Models downloaded successfully!")
-
-    # Note: For custom trained models, you would add them here
-    # For MVP, we use the pretrained YOLOv8n as a starting point
+    print("\n[TerraPave] Model setup completed successfully.")
+    print(f"Place custom road damage weights (e.g. RDD2020 / CRACK500) into: '{models_dir}/best.pt'\n")
 
 
 if __name__ == "__main__":
-    download_models()
+    setup_models()

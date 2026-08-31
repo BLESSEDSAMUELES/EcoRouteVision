@@ -1,0 +1,31 @@
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Virtual Environments
+.venv/
+venv/
+ENV/
+env/
+
+# Model Checkpoints & Large Artifacts
+*.pt
+*.onnx
+*.engine
+*.tflite
+
+# Output Media & Logs
+*.avi
+*.mp4
+*.mkv
+*.log
+test_output.*
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
